@@ -5,7 +5,7 @@ import { SuperUIComponentSchema } from './super-component';
 export function superUIComponent(options: SuperUIComponentSchema): Rule {
   return () => {
     const  templateSource = apply(
-        url('./files'), [
+        url('./files/__name@dasherize__.componenta.ts.template'), [
             applyTemplates({
                 classify: strings.classify,  // buisimler tempalteden geldi.
                 dasherize: strings.dasherize,
