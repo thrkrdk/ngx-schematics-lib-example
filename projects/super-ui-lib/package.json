@@ -1,11 +1,11 @@
 {
   "name": "super-ui-lib",
-  "version": "1.0.13",
+  "version": "1.0.17",
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.schematics.json && copyfiles schematics/collection.json ../../dist/super-ui-lib"
+    "build": "tsc -p tsconfig.schematics.json && copyfiles schematics/collection.json schematics/*/schema.json schematics/*/files/** ../../dist/super-ui-lib"
   },
   "ng-add": {
     "save": "true"

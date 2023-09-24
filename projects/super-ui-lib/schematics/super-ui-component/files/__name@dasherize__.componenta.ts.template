@@ -1,0 +1,20 @@
+import { Component, OnInit,ChangeDetectionStrategy } from '@angular/core';
+import {SuperUiLibService, TakeUntilDestroy} from 'super-ui-lib'
+ 
+@Component({
+  selector: '<%= dasherize(name) %>',
+  template: `  <p> <%= dasherize(name) %>  works!  </p>  `,
+  styles: [
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+@TakeUntilDestroy
+export class <%= classify(name) %>Component implements OnInit{
+    constructor(private superUiLibService:SuperUiLibService ) {
+
+    }
+    
+    ngOnInit(): void {
+
+    }
+}
