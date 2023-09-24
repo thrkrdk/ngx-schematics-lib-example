@@ -16,5 +16,5 @@
             "default":"src/app"
         }
     },
-    "required": []
+    "required": ["name", "path"]
 }
