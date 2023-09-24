@@ -1,4 +1,4 @@
-import { Rule,  apply,  applyTemplates,  chain,  mergeWith,  move, url } from '@angular-devkit/schematics';
+import { MergeStrategy, Rule,  apply,  applyTemplates,  chain,  externalSchematic,  mergeWith,  move, url } from '@angular-devkit/schematics';
 import {strings, normalize} from '@angular-devkit/core'
 import { SuperUIComponentSchema } from './super-component';
 
@@ -16,7 +16,8 @@ export function superUIComponent(options: SuperUIComponentSchema): Rule {
     ) 
 
     return chain([
-        mergeWith(templateSource)
+        externalSchematic('@schematics/angular', 'component',options),
+        mergeWith(templateSource, MergeStrategy.Overwrite)
     ]);
   };
 }
