@@ -1,6 +1,6 @@
 {
   "name": "super-ui-lib",
-  "version": "1.0.5",
+  "version": "1.0.12",
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },
