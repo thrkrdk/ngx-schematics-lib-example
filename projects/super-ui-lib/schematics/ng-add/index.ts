@@ -34,40 +34,41 @@ export function ngAdd(): Rule {
 
     removePackageJsonDependency(tree, 'protractor');
     console.log(getPackageJsonDependency(tree, 'protractor'));
-    
 
     //modifying app module
 
-    const modulePath = '/src/app/app.module.ts';
-    if (!tree.exists(modulePath)) {
-      throw new SchematicsException(`The file ${modulePath} is not found`);
-    }
-
-    const recorder: UpdateRecorder = tree.beginUpdate(modulePath); 
-    const text = tree.read(modulePath); 
-    if (text === null) {
-      throw new SchematicsException(`The file ${modulePath} is empty`);
-    }
-  
-
-    context.logger.info('dfddd3');
-    const source = ts.createSourceFile(
-      modulePath,
-      text.toString(),
-      ts.ScriptTarget.ESNext,
-      true
-    );
-
-    context.logger.info('dfddd4');
-    applyToUpdateRecorder(
-      recorder,
-      addImportToModule(source, modulePath, 'SuperUiLibModule', 'super-ui-lib')
-    );
-
-    tree.commitUpdate(recorder);
+    modifyAppModule(tree, context);
 
     context.addTask(new NodePackageInstallTask(), []);
 
     return tree;
   };
+}
+
+export function modifyAppModule(tree: Tree, context: SchematicContext) {
+  const modulePath = '/src/app/app.module.ts';
+  if (!tree.exists(modulePath)) {
+    throw new SchematicsException(`The file ${modulePath} is not found`);
+  }
+
+  const recorder: UpdateRecorder = tree.beginUpdate(modulePath);
+  const text = tree.read(modulePath);
+  if (text === null) {
+    throw new SchematicsException(`The file ${modulePath} is empty`);
+  }
+
+  const source = ts.createSourceFile(
+    modulePath,
+    text.toString(),
+    ts.ScriptTarget.ESNext,
+    true
+  );
+  applyToUpdateRecorder(
+    recorder,
+    addImportToModule(source, modulePath, 'SuperUiLibModule', 'super-ui-lib')
+  );
+
+  tree.commitUpdate(recorder);
+
+  context.logger.info('App-Module Modifed');
 }
